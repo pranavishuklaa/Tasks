@@ -21,6 +21,12 @@ if uploaded_files:
 
     user_input = st.text_input("❓ Your Question:")
     if user_input:
+        retrieved_docs = vectorstore.similarity_search(user_input, k=3)
+        # st.write("**Retrieved chunks:**")
+        # for i, doc in enumerate(retrieved_docs):
+        #     st.write(f"**Chunk {i+1}:** {doc.page_content[:300]}...")
+        #     st.write(f"**Score:** {doc.metadata if hasattr(doc, 'metadata') else 'N/A'}")
+        #     # st.write("---")
         result = qa_chain.run(user_input)
         st.markdown(f"**🤖 Answer:** {result}")
         
